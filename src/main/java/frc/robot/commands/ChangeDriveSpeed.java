@@ -17,7 +17,7 @@ public class ChangeDriveSpeed extends Command {
 
     @Override
     public void initialize() {
-        drive.speed = joystick.getBetterThrottle();
+        drive.speed = joystick.getBetterThrottle() / 10;
     }
 
     @Override

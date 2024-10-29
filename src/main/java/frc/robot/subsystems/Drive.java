@@ -21,7 +21,7 @@ public class Drive extends SubsystemBase {
         drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
     }
 
-    public double speed = 1;
+    public double speed = 0.1;
 
     public void curvatureDrive(double xSpeed, double zRotation) {
         drive.curvatureDrive(xSpeed, zRotation, false);

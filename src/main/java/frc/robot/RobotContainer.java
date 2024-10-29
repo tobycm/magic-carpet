@@ -66,7 +66,7 @@ public class RobotContainer {
         new Trigger(() -> joystick.getXAxis() != 0.0 || joystick.getYAxis() != 0.0)
                 .whileTrue(new Move(drive, joystick));
 
-        new Trigger(() -> joystick.getThrottle() != drive.speed)
+        new Trigger(() -> joystick.getThrottle() / 10 != drive.speed)
                 .onTrue(new ChangeDriveSpeed(drive, joystick));
     }
 

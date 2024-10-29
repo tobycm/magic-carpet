@@ -35,7 +35,7 @@ public class Move extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.curvatureDrive(joystick.getY(), -joystick.getX());
+    drive.curvatureDrive(joystick.getY(), -joystick.getTwist());
   }
 
   // Called once the command ends or is interrupted.
