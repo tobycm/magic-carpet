@@ -1,28 +1,23 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Joystick;
 import frc.robot.subsystems.Drive;
 
 public class ChangeDriveSpeed extends Command {
-    private final XboxController controller;
+    private final Joystick joystick;
     private final Drive drive;
 
-    public ChangeDriveSpeed(Drive drive, XboxController controller) {
+    public ChangeDriveSpeed(Drive drive, Joystick joystick) {
         this.drive = drive;
-        this.controller = controller;
+        this.joystick = joystick;
 
         addRequirements(drive);
     }
 
     @Override
     public void initialize() {
-        drive.speed = Math.round((drive.speed + (controller.getLeftBumper() ? -0.1 : 0.1)) * 10) / 10d;
-
-        if (drive.speed > 1)
-            drive.speed = 1;
-        if (drive.speed < 0)
-            drive.speed = 0;
+        drive.speed = joystick.getBetterThrottle();
     }
 
     @Override

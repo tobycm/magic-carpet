@@ -4,8 +4,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Joystick;
 import frc.robot.subsystems.Drive;
 
 /** An example command that uses an example subsystem. */
@@ -13,16 +13,16 @@ public class Move extends Command {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private Drive drive;
-  private XboxController controller;
+  private Joystick joystick;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Move(Drive drive, XboxController controller) {
+  public Move(Drive drive, Joystick joystick) {
     this.drive = drive;
-    this.controller = controller;
+    this.joystick = joystick;
 
     addRequirements(drive);
   }
@@ -35,13 +35,13 @@ public class Move extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.driveCartesian(controller.getLeftY(), -controller.getLeftX(), -controller.getRightX());
+    drive.curvatureDrive(joystick.getY(), -joystick.getX());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.driveCartesian(0, 0, 0);
+    drive.curvatureDrive(0, 0);
   }
 
   @Override

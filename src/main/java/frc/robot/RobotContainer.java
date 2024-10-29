@@ -43,8 +43,7 @@ public class RobotContainer {
             new WPI_VictorSPX(DriveConstants.frontRightMotorPort),
             new WPI_VictorSPX(DriveConstants.rearRightMotorPort));
 
-    private final XboxController controller = new XboxController(
-            OperatorConstants.driveRobotControllerPort);
+    private final Joystick joystick = new Joystick(OperatorConstants.driveRobotJoystickPort);
 
     // private final NintendoController shooterController = new NintendoController(
     // OperatorConstants.shooterControllerPort);
@@ -64,12 +63,11 @@ public class RobotContainer {
      * joysticks}.
      */
     private void configureBindings() {
-        new Trigger(() -> controller.getLeftY() != 0.0 || controller.getLeftX() != 0.0
-                || controller.getRightX() != 0.0)
-                .whileTrue(new Move(drive, controller));
+        new Trigger(() -> joystick.getXAxis() != 0.0 || joystick.getYAxis() != 0.0)
+                .whileTrue(new Move(drive, joystick));
 
-        new Trigger(() -> controller.getLeftBumper() || controller.getRightBumper())
-                .onTrue(new ChangeDriveSpeed(drive, controller));
+        new Trigger(() -> joystick.getThrottle() != drive.speed)
+                .onTrue(new ChangeDriveSpeed(drive, joystick));
     }
 
     // run any periodic code here
