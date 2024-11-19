@@ -17,6 +17,10 @@ public class Joystick extends edu.wpi.first.wpilibj.Joystick {
         return applyDeadzone(super.getY(), leftDeadZone);
     }
 
+    public double getZAxis() {
+        return applyDeadzone(super.getZ(), leftDeadZone);
+    }
+
     // applys deadzone because of stickdrift
     public static double applyDeadzone(double value, double deadzone) {
         if (value < deadzone && value > -deadzone)
@@ -25,6 +29,6 @@ public class Joystick extends edu.wpi.first.wpilibj.Joystick {
     }
 
     public double getBetterThrottle() {
-        return (super.getThrottle() * -1 + 1) / 2;
+        return (super.getTwist() * -1 + 1) / 2;
     }
 }

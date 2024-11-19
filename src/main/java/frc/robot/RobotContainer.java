@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.ChangeDriveSpeed;
 import frc.robot.commands.Move;
 import frc.robot.subsystems.Drive;
 
@@ -66,12 +65,13 @@ public class RobotContainer {
         new Trigger(() -> joystick.getXAxis() != 0.0 || joystick.getYAxis() != 0.0)
                 .whileTrue(new Move(drive, joystick));
 
-        new Trigger(() -> joystick.getThrottle() / 10 != drive.speed)
-                .onTrue(new ChangeDriveSpeed(drive, joystick));
     }
 
     // run any periodic code here
     public void tick() {
+        if (joystick.getBetterThrottle() != drive.speed) {
+            // drive.speed = joystick.getBetterThrottle();
+        }
     }
 
     public Command getAutonomousCommand() {

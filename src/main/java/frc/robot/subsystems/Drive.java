@@ -13,17 +13,19 @@ public class Drive extends SubsystemBase {
             WPI_VictorSPX rearRightMotor) {
 
         frontRightMotor.setInverted(true);
-        rearRightMotor.setInverted(true);
+        rearLeftMotor.setInverted(true);
 
-        frontLeftMotor.follow(rearLeftMotor);
-        frontRightMotor.follow(rearRightMotor);
+        rearLeftMotor.follow(frontLeftMotor);
+        rearRightMotor.follow(frontRightMotor);
 
         drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
+
     }
 
-    public double speed = 0.1;
+    public double speed = 0.65;
 
     public void curvatureDrive(double xSpeed, double zRotation) {
-        drive.curvatureDrive(xSpeed, zRotation, false);
+        drive.arcadeDrive(xSpeed * speed, zRotation);
+
     }
 }
